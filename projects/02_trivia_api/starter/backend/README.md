@@ -12,6 +12,23 @@ Follow instructions to install the latest version of python for your platform in
 
 We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
+First install python3-venv in your Ubuntu WSL installation
+```bash
+sudo apt-get install python3-venv
+```
+Then, create a virtual enviroment with the following command 
+```bash
+python3 -m venv ev    
+```
+Activate the venv with:
+
+```bash
+source env/bin/activate
+```
+Now you can insall dependences in the venv
+
+Remember to add env folder and pip to .gitignore 
+
 #### PIP Dependencies
 
 Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
