@@ -101,7 +101,7 @@ Errors are returned as JSON objects in the following format:
 
 ```json
 {
-    "success": False,
+    "success": false,
     "error": 400,
     "message": "bad request"
 }
@@ -166,7 +166,7 @@ The API will return three error types when requests fail:
       "difficulty": 4, 
       "id": 2, 
       "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    }, ...
+    }
   ],
   "total_questions": 19
 ```
@@ -187,8 +187,7 @@ Deletes the question of the given ID if it exists. Returns the id of the deleted
         "difficulty": 4, 
         "id": 2, 
         "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-        },
-        //...
+        }
     ],
     "deleted": 16,
     "success": true,
@@ -277,8 +276,8 @@ Retrieves a random question from the pool of questions or from the selected cate
 
 ```json
     {
-        "previous_questions": [(list of previous questions ids comma separated)],
-        "quiz_category": {type: "category type", id: "id of the category"}
+        "previous_questions": [1,2,3],
+        "quiz_category": {"type": "category type", "id": 1}
     }
 ```
 
@@ -286,7 +285,7 @@ Retrieves a random question from the pool of questions or from the selected cate
 
 ```json
     {
-        "success": true|false,
+        "success": true,
         "question": {"the question"},
     }  
 ```
