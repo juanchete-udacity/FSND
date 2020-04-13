@@ -103,11 +103,11 @@ Errors are returned as JSON objects in the following format:
 {
     "success": false,
     "error": 400,
-    "message": "bad request"
+    "message": "Bad Request"
 }
 ```
 
-The API will return three error types when requests fail:
+The API will return four error types when requests fail:
 
 400: Bad Request
 404: Resource Not Found
@@ -122,7 +122,7 @@ The API will return three error types when requests fail:
   - A Boolean if success
   - A dictionary of categories, that contains a object of id: category_string key:value pairs.
   - A number with the total of categories
-- Sample: `curl http://127.0.0.1/categories`
+- Sample: `curl http://127.0.0.1:5000/categories`
 ```json
 {
   "categories": {
@@ -146,7 +146,7 @@ The API will return three error types when requests fail:
   - An integer with the current category
   - The list of questions
   - The total amount of questions 
-- Sample: `curl http://127.0.0.1/questions?page=1`
+- Sample: `curl http://127.0.0.1:5000/questions?page=1`
 ```json
 {
   "success": true,
@@ -212,7 +212,7 @@ Creates a new question with the body containing the fields of a question, or if 
 
 - Returns:
   - A json with the status of success, the question created, a dictionary of all the questions and the number of total questions.
-  - Sample: `curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions -d '{"question": "question text", "answer": "answer", "difficulty": "1", "category": "1"}`
+  - Sample: `curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions -d '{"question": "question text", "answer": "answer", "difficulty": "1", "category": "1"}'`
     ```json
     {
         "success": true,
@@ -227,7 +227,7 @@ Retrieves the questions with the category id passed as part of the path
 
 - Request Arguments: *page* for pagination
 - Returns: the dictionary of categories, the current category type, a list of questions as the result of the query and the total number of questions for pagination
-- Sample: `curl http://127.0.0.1/categories/<category_id>/questions?page=1`
+- Sample: `curl http://127.0.0.1:5000/categories/1/questions?page=1`
 ```json
 
 {
@@ -289,7 +289,7 @@ Retrieves a random question from the pool of questions or from the selected cate
         "question": {"the question"},
     }  
 ```
-- Sample: `curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/quizzes -d '{"previous_questions": [1,11,13],"quiz_category": {"type": "category type", "id": "1"}}` 
+- Sample: `curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/quizzes -d '{"previous_questions": [1,11,13],"quiz_category": {"type": "category type", "id": "1"}}'` 
 ## Authors
 
 Juan José Rodríguez Buleo
