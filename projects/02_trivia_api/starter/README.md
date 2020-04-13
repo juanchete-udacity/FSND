@@ -22,15 +22,12 @@ The `./backend` directory contains a completed Flask and SQLAlchemy server. Chec
 
 The `./frontend` directory contains a complete React frontend to consume the data from the Flask server. Check the [React Frontend README](frontend/README.md) for instructions and 
 
-#### Installing Node and NPM
+## Installing and Running Instructions
 
-This project depends on Nodejs and Node Package Manager (NPM). Before continuing, you must download and install Node (the download includes NPM) from [https://nodejs.com/en/download](https://nodejs.org/en/download/).
+Check the Banckend and Frontend READMEs to see how to install and run the app
 
-#### Installing project dependencies
+### Jump to API Reference
 
-This project uses NPM to manage software dependencies. NPM Relies on the package.json file located in the `frontend` directory of this repository. After cloning, open your terminal and run:
+Just a link to the [API Reference](./backend/README.md#"API-Reference") 
 
-```bash
-npm install
-```
 
