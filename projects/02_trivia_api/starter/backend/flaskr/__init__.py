@@ -83,13 +83,14 @@ def create_app(test_config=None):
         categories = format_categories(Category.query.order_by(Category.id).all())
         if len(paginated_questions) == 0 or len(categories) == 0:
             abort(404)
-
-        return jsonify({
-            'questions': paginated_questions,
-            'total_questions': len(selection),
-            'categories': categories,
-            'current_category': 'ALL'
-        })
+        else:
+             return jsonify({
+                'questions': paginated_questions,
+                'total_questions': len(selection),
+                'categories': categories,
+                'current_category': 'ALL',
+                'success': True
+            })
     '''
     DONE: Create an endpoint to DELETE question using a question ID. 
 
@@ -202,6 +203,7 @@ def create_app(test_config=None):
         categories =format_categories(Category.query.order_by(Category.id).all())
         
         return jsonify({
+            'success': True,
             'questions': paginated_questions,
             'total_questions': len(paginated_questions),
             'categories': categories,

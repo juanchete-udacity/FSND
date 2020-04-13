@@ -59,9 +59,11 @@ psql trivia < trivia.psql
 
 From within the `backend` directory first ensure you are working using your created virtual environment.
 
-Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.
-Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` directory and the `__init__.py` file to find the application. 
-Setting the `PSQL_USER` and `PSQL_PWD` variables is mandatory in order to have the database connection working.
+### Environment variables
+
+- Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.
+- Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` directory and the `__init__.py` file to find the application. 
+- Setting the `PSQL_USER` and `PSQL_PWD` variables is mandatory in order to have the database connection working.
 
 To run the server, execute:
 
@@ -120,7 +122,7 @@ The API will return three error types when requests fail:
   - A Boolean if success
   - A dictionary of categories, that contains a object of id: category_string key:value pairs.
   - A number with the total of categories
-
+- Sample: `curl http://127.0.0.1/categories`
 ```json
 {
   "categories": {
@@ -144,9 +146,10 @@ The API will return three error types when requests fail:
   - An integer with the current category
   - The list of questions
   - The total amount of questions 
-
+- Sample: `curl http://127.0.0.1/questions?page=1`
 ```json
 {
+  "success": true,
   "categories": {
     "1": "Science", 
     "2": "Art", 
@@ -171,11 +174,11 @@ The API will return three error types when requests fail:
 **DELETE /questions/{question_id}**
 Deletes the question of the given ID if it exists. Returns the id of the deleted question, success value, total questions, and question list based on current page number to update the frontend.
 
-- Request Arguments: None, question_id is given in the path
+- Request Arguments: None, question_id is given in the path. *page* if given from the list view for pagination
 - Returns: the id of the deleted question, the questions array, the number of questions remaining and the status  
-
+- Sample: `curl -X DELETE http://127.0.0.1:5000/questions/1?page=2`
 ```json
-curl -X DELETE http://127.0.0.1:5000/questions/16?page=2
+
 {
     "questions": [
         {
@@ -185,7 +188,7 @@ curl -X DELETE http://127.0.0.1:5000/questions/16?page=2
         "id": 2, 
         "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
         },
-        ...
+        //...
     ],
     "deleted": 16,
     "success": true,
@@ -200,23 +203,23 @@ Creates a new question with the body containing the fields of a question, or if 
 
     ```json
     {
-        question: "Question text"
-        answer: "Answer text"
-        difficulty: 1
-        category: "4"
-        searchTerm?: "search term"
+        "question": "Question text",
+        "answer": "Answer text",
+        "difficulty": 1,
+        "category": "4",
+        "searchTerm": "search term"
     }
     ```
 
 - Returns:
   - A json with the status of success, the question created, a dictionary of all the questions and the number of total questions.
-
+  - Sample: `curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions -d '{"question": "question text", "answer": "answer", "difficulty": "1", "category": "1"}`
     ```json
     {
-        'success': True,
-        'created': {the question created},
-        'questions': ...,
-        'total_questions': 16
+        "success": true,
+        "created": {"the question created"},
+        "questions": "...",
+        "total_questions": 16
     }
     ```
 
@@ -225,9 +228,9 @@ Retrieves the questions with the category id passed as part of the path
 
 - Request Arguments: *page* for pagination
 - Returns: the dictionary of categories, the current category type, a list of questions as the result of the query and the total number of questions for pagination
-
+- Sample: `curl http://127.0.0.1/categories/<category_id>/questions?page=1`
 ```json
-curl http://127.0.0.1/categories/<category_id>/questions?page=1
+
 {
   "categories": {
     "1": "Science", 
@@ -261,7 +264,8 @@ curl http://127.0.0.1/categories/<category_id>/questions?page=1
       "question": "Hematology is a branch of medicine involving the study of what?"
     }
   ], 
-  "total_questions": 3
+  "total_questions": 3,
+  "success": true,
 }
 ```
 
@@ -273,8 +277,8 @@ Retrieves a random question from the pool of questions or from the selected cate
 
 ```json
     {
-        previous_questions: [(list of previous questions ids comma separated)],
-        quiz_category: {type: "category type", id: "id of the category"}
+        "previous_questions": [(list of previous questions ids comma separated)],
+        "quiz_category": {type: "category type", id: "id of the category"}
     }
 ```
 
@@ -282,11 +286,11 @@ Retrieves a random question from the pool of questions or from the selected cate
 
 ```json
     {
-        'success': true or false,
-        'question': {...the question},
+        "success": true|false,
+        "question": {"the question"},
     }  
 ```
-
+- Sample: `curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/quizzes -d '{"previous_questions": [1,11,13],"quiz_category": {"type": "category type", "id": "1"}}` 
 ## Authors
 
 Juan José Rodríguez Buleo
